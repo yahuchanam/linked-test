@@ -1,0 +1,11 @@
+.filter-form {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 1rem auto 0;
+
+  .mdc-button {
+    height: 56px;
+  }
+}

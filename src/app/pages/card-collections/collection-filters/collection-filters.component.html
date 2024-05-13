@@ -1,0 +1,21 @@
+<form [formGroup]="form" class="filter-form">
+
+  <mat-form-field>
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Bloco</mat-label>
+    <mat-select formControlName="block" required>
+      @for (block of blocks; track block) {
+      <mat-option [value]="block">{{ block }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-flat-button type="submit" color="primary">
+    <mat-icon>search</mat-icon>
+    Buscar
+  </button>
+</form>
