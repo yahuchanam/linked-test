@@ -8,4 +8,9 @@ export const routes: Routes = [
         (m) => m.CardCollectionsComponent
       ),
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'card-collection',
+  },
 ];
