@@ -6,14 +6,21 @@
 
 <div class="collection-list">
   @for (collection of $collections() | async; track $index) {
+    @if($index === 0) {
+      <h1>Coleções</h1>
+    }
     <app-collection-set [collection]="collection"></app-collection-set>
   } @empty {
-    @if($seachFilters().block === null) {
+    @if($loading()) {
+      <mat-spinner class="loader" [diameter]="100"></mat-spinner>
+    }
+    @else if (!$loading() && $seachFilters().block === null) {
       <app-no-result
         icon="search"
         title="Escolha um bloco para exibi-lo"
       ></app-no-result>
-    } @else {
+    }
+    @else {
       <app-no-result
         icon="sentiment_dissatisfied"
         title="Nenhuma coleção encontrada"

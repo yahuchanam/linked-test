@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { BLOCK_FILTERS } from '../../mocks/block-filters.mock';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, map, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, map, of, switchMap, tap } from 'rxjs';
 import {
   CollectionFilter,
   CollectionPayload,
@@ -14,6 +14,8 @@ import { APP_SETTINGS } from '../../app.settings';
 })
 export class ColletionService {
   private http = inject(HttpClient);
+
+  loading = new BehaviorSubject<boolean>(false);
 
   constructor() {}
 
@@ -42,6 +44,7 @@ export class ColletionService {
   }
 
   private setsRequest(filters: CollectionFilter): Observable<CollectionSet[]> {
+    this.loading.next(true);
     return this.http
       .get<CollectionPayload>(`${APP_SETTINGS.MTG_API}/v1/sets`, {
         params: this.getSetsRequestParams(filters),
@@ -52,7 +55,8 @@ export class ColletionService {
             ...s,
             releaseDate: new Date(s.releaseDate),
           }))
-        )
+        ),
+        tap(() => this.loading.next(false))
       );
   }
 }

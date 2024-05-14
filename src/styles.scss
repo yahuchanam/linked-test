@@ -9,3 +9,12 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #262626;
 }
+
+:root {
+  --mat-option-selected-state-label-text-color: #fd0;
+  --mdc-filled-text-field-focus-label-text-color: #fd0;
+}
+
+.mat-primary {
+  --mat-minimal-pseudo-checkbox-selected-checkmark-color: #fd0;
+}
