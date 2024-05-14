@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,8 +11,10 @@ import { ColletionService } from '../../../services/colletion/colletion.service'
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { TextValidators } from '../../../validators/text.validator';
+import { CollectionFilter } from '../../../model/model';
 
-type CollectionFilter = {
+type CollectionFilterForm = {
   block: FormControl<string>;
   name?: FormControl<string | null>;
 };
@@ -37,14 +39,16 @@ export class CollectionFiltersComponent {
 
   blocks = this.collectionService.getBlockFilters();
 
-  form = new FormGroup<CollectionFilter>({
+  form = new FormGroup<CollectionFilterForm>({
     name: new FormControl(null, {
       nonNullable: false,
-      validators: [],
+      validators: [TextValidators.withoutWhiteSpace],
     }),
     block: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
   });
+
+  filters = output<CollectionFilter>();
 }

@@ -1,5 +1,8 @@
-<form [formGroup]="form" class="filter-form">
-
+<form
+  [formGroup]="form"
+  class="filter-form"
+  (ngSubmit)="filters.emit(this.form.getRawValue())"
+>
   <mat-form-field>
     <mat-label>Nome</mat-label>
     <input matInput formControlName="name" />
@@ -14,7 +17,12 @@
     </mat-select>
   </mat-form-field>
 
-  <button mat-flat-button type="submit" color="primary">
+  <button
+    mat-flat-button
+    type="submit"
+    color="primary"
+    [disabled]="form.invalid"
+  >
     <mat-icon>search</mat-icon>
     Buscar
   </button>

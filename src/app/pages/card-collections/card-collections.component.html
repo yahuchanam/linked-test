@@ -1,2 +1,23 @@
-<app-collection-filters></app-collection-filters>
+<app-collection-filters
+  (filters)="$seachFilters.set($event)"
+></app-collection-filters>
+
 <mat-divider></mat-divider>
+
+<div class="collection-list">
+  @for (collection of $collections() | async; track $index) {
+    <app-collection-set [collection]="collection"></app-collection-set>
+  } @empty {
+    @if($seachFilters().block === null) {
+      <app-no-result
+        icon="search"
+        title="Escolha um bloco para exibi-lo"
+      ></app-no-result>
+    } @else {
+      <app-no-result
+        icon="sentiment_dissatisfied"
+        title="Nenhuma coleção encontrada"
+      ></app-no-result>
+    }
+  }
+</div>
