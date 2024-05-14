@@ -13,6 +13,7 @@ import {
 } from 'rxjs';
 import { BoosterPayload, CardBooster } from '../../model/model';
 import { APP_SETTINGS } from '../../app.settings';
+import { boosterMock } from '../../mocks/booster.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,8 @@ export class BoosterService extends HttpDefaultService {
   retriveCreatureDeck(id: string | undefined): Observable<CardBooster[]> {
     if (id === undefined) return of([]);
     this.cachedDeck = [];
-    return this.getCreaturesDeckRecursively(id);
+    return of(boosterMock);
+    // return this.getCreaturesDeckRecursively(id);
   }
 
   replaceCards(
