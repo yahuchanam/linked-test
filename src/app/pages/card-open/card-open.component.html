@@ -6,7 +6,7 @@
       <h1 class="cards-list__title">Abrindo os seus boosters, por favor aguarde.</h1>
       <mat-spinner class="loader" [diameter]="100"></mat-spinner>
     } @else {
-      <h1 class="cards-list__title">Suas cartas do pacote aberto</h1>
+      <h1 class="cards-list__title">Suas cartas dos pacotes abertos</h1>
     } @for (card of $creatureDeck() | async; track $index) {
       <app-card
         [card]="card"
