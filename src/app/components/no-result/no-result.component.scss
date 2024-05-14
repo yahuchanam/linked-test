@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  color: #bbb;
+  margin-top: 5rem;
+}
+
+.icon {
+  font-size: 4rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+.title {
+  font-size: 1.5rem;
+}
