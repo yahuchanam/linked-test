@@ -1,11 +1,29 @@
 .filter-form {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  padding: 0 1rem 1rem;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
   margin: 1rem auto 0;
 
   .mdc-button {
     height: 56px;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0;
+  }
+}
+
+.logo {
+  height: 56px;
+  align-self: center;
+  margin-bottom: 1rem;
+
+  @media (min-width: 768px) {
+    margin-bottom: 1rem;
   }
 }

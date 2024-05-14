@@ -3,6 +3,8 @@
   class="filter-form"
   (ngSubmit)="filters.emit(this.form.getRawValue())"
 >
+  <img src="assets/imgs/logo.png" class="logo"/>
+
   <mat-form-field>
     <mat-label>Nome</mat-label>
     <input matInput formControlName="name" />
