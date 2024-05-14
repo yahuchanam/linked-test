@@ -1,23 +1,22 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BLOCK_FILTERS } from '../../mocks/block-filters.mock';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, map, of, switchMap, tap } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
+import { Observable, asapScheduler, map, of, switchMap, tap } from 'rxjs';
 import {
   CollectionFilter,
   CollectionPayload,
   CollectionSet,
 } from '../../model/model';
 import { APP_SETTINGS } from '../../app.settings';
+import { HttpDefaultService } from '../http-default/http-default.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ColletionService {
-  private http = inject(HttpClient);
-
-  loading = new BehaviorSubject<boolean>(false);
-
-  constructor() {}
+export class ColletionService extends HttpDefaultService {
+  constructor() {
+    super();
+  }
 
   getBlockFilters(): string[] {
     return BLOCK_FILTERS;
@@ -44,7 +43,7 @@ export class ColletionService {
   }
 
   private setsRequest(filters: CollectionFilter): Observable<CollectionSet[]> {
-    this.loading.next(true);
+    asapScheduler.schedule(() => this.loading.next(true));
     return this.http
       .get<CollectionPayload>(`${APP_SETTINGS.MTG_API}/v1/sets`, {
         params: this.getSetsRequestParams(filters),

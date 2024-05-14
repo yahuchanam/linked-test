@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { TextValidators } from '../../../validators/text.validator';
 import { CollectionFilter } from '../../../model/model';
+import { LogoComponent } from '../../../components/logo/logo.component';
 
 type CollectionFilterForm = {
   block: FormControl<string>;
@@ -30,6 +31,7 @@ type CollectionFilterForm = {
     MatButtonModule,
     MatButtonModule,
     MatIconModule,
+    LogoComponent,
   ],
   templateUrl: './collection-filters.component.html',
   styleUrl: './collection-filters.component.scss',

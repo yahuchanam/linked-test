@@ -2,15 +2,26 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'card-collection',
+    path: 'search',
     loadComponent: () =>
       import('./pages/card-collections/card-collections.component').then(
         (m) => m.CardCollectionsComponent
       ),
   },
   {
+    path: 'open-deck/:id',
+    loadComponent: () =>
+      import('./pages/card-open/card-open.component').then(
+        (m) => m.CardOpenComponent
+      ),
+  },
+  {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'card-collection',
+    redirectTo: 'search',
+  },
+  {
+    path: '**',
+    redirectTo: 'search',
   },
 ];

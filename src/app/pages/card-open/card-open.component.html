@@ -1,0 +1,33 @@
+<app-card-open-header></app-card-open-header>
+<mat-divider></mat-divider>
+@if($boosterId() !== undefined) {
+  <div class="cards-list">
+    @if($loading() && !apiError()) {
+      <h1 class="cards-list__title">Abrindo os seus boosters, por favor aguarde.</h1>
+      <mat-spinner class="loader" [diameter]="100"></mat-spinner>
+    } @else if (!apiError()){
+      <h1 class="cards-list__title">Suas cartas dos pacotes abertos</h1>
+    } @for (card of $creatureDeck() | async; track $index) {
+      <app-card
+        [card]="card"
+        [showSelect]="showSelect()"
+        [replaced]="isReplacedCards()"
+        (select)="addSelectList($event)"
+        (undo)="removeSelectList($event)"
+      ></app-card>
+    }
+    @if(apiError()) {
+      <h1 class="cards-list__title result-error">Erro ao recuperar as cartas {{$boosterId()}}</h1>
+    }
+  </div>
+  @if(selectedCard().length > 0 && !isReplacedCards()) {
+    <button
+      type="button"
+      mat-raised-button
+      class="selected-cards"
+      (click)="replaceSelectedCards()"
+    >
+      {{ selectedCard().length }} / 5 cards para troca
+    </button>
+  }
+}

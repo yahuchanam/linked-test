@@ -1,0 +1,39 @@
+<div class="card" [style]="colorIdentityStyle()">
+  <div class="card__col">
+    <img [src]="card().imageUrl" class="card__image" />
+
+    @if(!replaced()) {
+      @if (selected()) {
+        <button
+          mat-mini-fab
+          type="button"
+          class="card__btn-action card__undo"
+          (click)="undoClick()"
+        >
+          <mat-icon>undo</mat-icon>
+        </button>
+      } @else {
+        @if(showSelect()) {
+          <button
+            mat-mini-fab
+            type="button"
+            class="card__btn-action card__delete"
+            (click)="selectClick()"
+          >
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        }
+      }
+  }
+  </div>
+  <div class="card__col">
+    <h1 class="card__title">{{ card().name }}</h1>
+    <app-card-mana
+      class="card__cost"
+      [manaCost]="card().manaCost ?? ''"
+    ></app-card-mana>
+    <p class="card__description">
+      {{ card().text }}
+    </p>
+  </div>
+</div>
