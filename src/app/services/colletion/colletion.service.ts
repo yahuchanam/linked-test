@@ -40,7 +40,7 @@ export class ColletionService {
       const emptyRegex = /^\s+$/;
       filterParam.push(filters.name.replace(emptyRegex, ''));
     }
-    return new HttpParams().set('name', filterParam.join('|'));
+    return new HttpParams().set('name', filterParam.reverse().join('|'));
   }
 
   private setsRequest(filters: CollectionFilter): Observable<CollectionSet[]> {
