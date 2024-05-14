@@ -1,2 +1,28 @@
 <app-card-open-header></app-card-open-header>
 <mat-divider></mat-divider>
+@if($boosterId() !== undefined) {
+  <div class="cards-list">
+    @if($loading()) {
+      <mat-spinner class="loader" [diameter]="100"></mat-spinner>
+    } @else {
+      <h1 class="cards-list__title">Suas cartas do pacote aberto</h1>
+    } @for (card of $creatureDeck() | async; track $index) {
+      <app-card
+        [card]="card"
+        [showSelect]="showSelect()"
+        (select)="addSelectList($event)"
+        (undo)="removeSelectList($event)"
+      ></app-card>
+    }
+  </div>
+  @if(selectedCard().length > 0) {
+    <button
+      type="button"
+      mat-raised-button
+      class="selected-cards"
+      (click)="replaceSelectedCards()"
+    >
+      {{ selectedCard().length }} / 5 cards para troca
+    </button>
+  }
+}

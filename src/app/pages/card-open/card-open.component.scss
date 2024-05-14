@@ -1,0 +1,28 @@
+.cards-list {
+  padding: 1rem;
+  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+
+  &__title {
+    color: #fff;
+    margin: 0 auto;
+    font-size: 1rem;
+
+    @media (min-width: 768px) {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+.selected-cards.mat-mdc-raised-button:not(:disabled) {
+  background: #F30;
+  color: #FFF;
+  padding: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

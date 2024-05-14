@@ -1,0 +1,53 @@
+@mixin text-formartter($size, $color, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+  margin: 0;
+  padding: 0;
+}
+
+:host {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  background: #1e1e1e;
+  padding: 7px;
+  gap: 1rem;
+  width: 100%;
+  position: relative;
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__image {
+    height: 160px;
+    min-width: 115px;
+  }
+
+  &__title {
+    @include text-formartter(0.9rem, #fc0, 600);
+  }
+
+  &__description {
+    @include text-formartter(0.8rem, #ccc, 300);
+  }
+
+  &__btn-action {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    transform: scale(0.7);
+  }
+
+  &__delete {
+    background: #b60000;
+    color: #FFF;
+  }
+}

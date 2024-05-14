@@ -1,0 +1,10 @@
+@for (mana of manaCost(); track $index) {
+  @switch (mana.type) {
+    @case ('image') {
+      <img [src]="mana.value">
+    }
+    @case ('number') {
+      <div class="cost-value">{{mana.value}}</div>
+    }
+  }
+}
