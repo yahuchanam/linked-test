@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { CardOpenHeaderComponent } from './card-open-header/card-open-header.component';
 import { BoosterService } from '../../services/booster/booster.service';
 import { CardComponent } from './card/card.component';
@@ -35,11 +35,15 @@ export class CardOpenComponent {
   );
 
   $creatureDeck = computed(() =>
-    this.boosterService.retriveCreatureDeck(this.$boosterId())
+    this.replaceCards().length > 0
+      ? this.boosterService.replaceCards(this.$boosterId(), this.replaceCards())
+      : this.boosterService.retriveCreatureDeck(this.$boosterId())
   );
 
   selectedCard = signal<CardBooster[]>([]);
   showSelect = signal<boolean>(true);
+  isReplacedCards = signal<boolean>(false);
+  replaceCards = signal<CardBooster[]>([]);
 
   addSelectList(card: CardBooster): void {
     this.selectedCard.update((selected) => [...selected, card]);
@@ -58,6 +62,7 @@ export class CardOpenComponent {
   }
 
   replaceSelectedCards(): void {
-
+    this.replaceCards.set(this.selectedCard());
+    this.isReplacedCards.set(true);
   }
 }

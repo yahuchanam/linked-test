@@ -3,6 +3,7 @@
 @if($boosterId() !== undefined) {
   <div class="cards-list">
     @if($loading()) {
+      <h1 class="cards-list__title">Abrindo os seus boosters, por favor aguarde.</h1>
       <mat-spinner class="loader" [diameter]="100"></mat-spinner>
     } @else {
       <h1 class="cards-list__title">Suas cartas do pacote aberto</h1>
@@ -10,12 +11,13 @@
       <app-card
         [card]="card"
         [showSelect]="showSelect()"
+        [replaced]="isReplacedCards()"
         (select)="addSelectList($event)"
         (undo)="removeSelectList($event)"
       ></app-card>
     }
   </div>
-  @if(selectedCard().length > 0) {
+  @if(selectedCard().length > 0 && !isReplacedCards()) {
     <button
       type="button"
       mat-raised-button

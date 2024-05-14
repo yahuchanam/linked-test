@@ -3,7 +3,6 @@ import { HttpDefaultService } from '../http-default/http-default.service';
 import {
   Observable,
   asapScheduler,
-  distinctUntilChanged,
   filter,
   map,
   of,
@@ -12,21 +11,30 @@ import {
 } from 'rxjs';
 import { BoosterPayload, CardBooster } from '../../model/model';
 import { APP_SETTINGS } from '../../app.settings';
-import { boosterMock } from '../../mocks/booster.mock';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoosterService extends HttpDefaultService {
+  cachedDeck: CardBooster[] = [];
+
   constructor() {
     super();
   }
 
   retriveCreatureDeck(id: string | undefined): Observable<CardBooster[]> {
     if (id === undefined) return of([]);
+    this.cachedDeck = [];
+    return this.getCreaturesDeckRecursively(id);
+  }
 
-    return of(boosterMock);
-    // return this.getCreaturesDeckRecursively(id);
+  replaceCards(
+    id: string | undefined,
+    cardsToReplace: CardBooster[]
+  ): Observable<CardBooster[]> {
+    if (id === undefined) return of([]);
+    const deck = this.cachedDeck.filter((c) => !cardsToReplace.includes(c));
+    return this.getCreaturesDeckRecursively(id, deck);
   }
 
   private getCreaturesDeckRecursively(
@@ -47,8 +55,8 @@ export class BoosterService extends HttpDefaultService {
             : this.getCreaturesDeckRecursively(id, deck)
         ),
         filter((deck) => deck.length === 30),
-        tap(() => this.loading.next(false)),
-        tap((deck) => console.log(deck))
+        tap((deck) => (this.cachedDeck = deck)),
+        tap(() => this.loading.next(false))
       );
   }
 }

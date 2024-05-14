@@ -2,7 +2,7 @@
   <div class="card__col">
     <img [src]="card().imageUrl" class="card__image" />
 
-    @if(!processed()) {
+    @if(!replaced()) {
       @if (selected()) {
         <button
           mat-mini-fab

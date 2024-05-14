@@ -9,11 +9,16 @@
     color: #fff;
     margin: 0 auto;
     font-size: 1rem;
+    text-align: center;
 
     @media (min-width: 768px) {
       font-size: 1.6rem;
     }
   }
+}
+
+.loader {
+  margin: 60px auto;
 }
 
 .selected-cards.mat-mdc-raised-button:not(:disabled) {

@@ -17,7 +17,7 @@ export class CardComponent {
   undo = output<CardBooster>();
   select = output<CardBooster>();
   selected = signal<boolean>(false);
-  processed = signal<boolean>(false);
+  replaced = input.required<boolean>();
 
   undoClick(): void {
     this.selected.set(false);
