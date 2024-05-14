@@ -37,12 +37,17 @@ export type BoosterPayload = {
 
 export type CardBoosterForeignName = {
   name: string;
-  text: string;
+  text?: string;
   type: string;
-  flavor: string;
+  flavor?: string | null;
   imageUrl: string;
   language: string;
   multiverseid: number;
+};
+
+export type CardRuling = {
+  date: string;
+  text: string;
 };
 
 export type CardsBoosterLegality = {
@@ -54,13 +59,19 @@ export type CardBooster = {
   id: string;
   name: string;
   cmc: number;
+  manaCost?: string;
+  colorIdentity: string[] | string;
+  colors: string[];
+  subtypes: string[];
   type: string;
   types: string[];
   rarity: string;
+  power: string;
+  toughness: string;
   set: string;
   setName: string;
-  text: string;
-  flavor: string;
+  text?: string | null;
+  flavor?: string | null;
   artist: string;
   number: string;
   layout: string;
@@ -68,7 +79,8 @@ export type CardBooster = {
   imageUrl: string;
   foreignNames: CardBoosterForeignName[];
   printings: string[];
-  originalText: string;
+  originalText?: string;
   originalType: string;
   legalities: CardsBoosterLegality[];
+  rulings?: CardRuling[];
 };
