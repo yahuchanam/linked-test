@@ -20,4 +20,8 @@ export const routes: Routes = [
     pathMatch: 'full',
     redirectTo: 'search',
   },
+  {
+    path: '**',
+    redirectTo: 'search',
+  },
 ];
