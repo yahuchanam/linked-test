@@ -28,8 +28,7 @@ export class BoosterService extends HttpDefaultService {
   retriveCreatureDeck(id: string | undefined): Observable<CardBooster[]> {
     if (id === undefined) return of([]);
     this.cachedDeck = [];
-    return of(boosterMock);
-    // return this.getCreaturesDeckRecursively(id);
+    return this.getCreaturesDeckRecursively(id);
   }
 
   replaceCards(
