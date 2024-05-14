@@ -31,7 +31,7 @@ O teste essa semana me pegou realmente de surpresa, por isso não tive tanto tem
 npm install && ng serve -o
 ```
 ou acesse:
-https://linked-test.vercel.app/
+https://linked-test-sigma.vercel.app/
 
 
 Obrigado!
