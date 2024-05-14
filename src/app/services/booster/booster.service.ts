@@ -3,11 +3,13 @@ import { HttpDefaultService } from '../http-default/http-default.service';
 import {
   Observable,
   asapScheduler,
+  catchError,
   filter,
   map,
   of,
   switchMap,
   tap,
+  throwError,
 } from 'rxjs';
 import { BoosterPayload, CardBooster } from '../../model/model';
 import { APP_SETTINGS } from '../../app.settings';
@@ -46,7 +48,19 @@ export class BoosterService extends HttpDefaultService {
     return this.http
       .get<BoosterPayload>(`${APP_SETTINGS.MTG_API}/v1/sets/${id}/booster`)
       .pipe(
-        map(({ cards }) => cards.filter((c) => c.types.includes('Creature'))),
+        catchError(({ response, status }) => {
+          if (status !== 200) {
+            return throwError(() => ({
+              status,
+              error: `Erro ao recuperar o booster ${id}.`,
+            }));
+          } else {
+            return of(response);
+          }
+        }),
+        map(({ cards }: BoosterPayload) =>
+          cards.filter((c) => c.types.includes('Creature'))
+        ),
         map((cards) => creaturesDeck.concat(cards)),
         tap((deck) => console.log(deck.length)),
         switchMap((deck) =>

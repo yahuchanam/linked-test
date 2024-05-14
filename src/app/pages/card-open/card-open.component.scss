@@ -27,6 +27,13 @@
   margin: 60px auto;
 }
 
+.result-error {
+  color: #F30;
+  border: 1px solid #F30;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
 .selected-cards.mat-mdc-raised-button:not(:disabled) {
   background: #F30;
   color: #FFF;
