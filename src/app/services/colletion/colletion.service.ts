@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BLOCK_FILTERS } from '../../mocks/block-filters.mock';
 import { HttpParams } from '@angular/common/http';
-import { Observable, map, of, switchMap, tap } from 'rxjs';
+import { Observable, asapScheduler, map, of, switchMap, tap } from 'rxjs';
 import {
   CollectionFilter,
   CollectionPayload,
@@ -43,7 +43,7 @@ export class ColletionService extends HttpDefaultService {
   }
 
   private setsRequest(filters: CollectionFilter): Observable<CollectionSet[]> {
-    this.loading.next(true);
+    asapScheduler.schedule(() => this.loading.next(true));
     return this.http
       .get<CollectionPayload>(`${APP_SETTINGS.MTG_API}/v1/sets`, {
         params: this.getSetsRequestParams(filters),
